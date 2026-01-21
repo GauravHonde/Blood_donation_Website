@@ -1,0 +1,110 @@
+<%- include('navbar.ejs') %>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+
+                <div class="card border-0 shadow-lg rounded-4">
+
+                    <!-- Header -->
+                    <div class="card-header bg-danger text-white text-center rounded-top-4">
+                        <h4 class="mb-0 fw-bold">
+                            <i class="bi bi-heart-pulse-fill me-2"></i>
+                            Update Blood Donation Contact Information
+                        </h4>
+                        <small class="opacity-75">
+                            Keep emergency contact details accurate
+                        </small>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="card-body p-4 p-md-5 bg-light">
+
+                        <form action="/admin/contact_update_save/<%= update[0].contact_id %>" method="post">
+
+                            <!-- Address -->
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">
+                                    <i class="bi bi-geo-alt-fill text-danger me-2"></i>Address
+                                </label>
+                                <input type="text" name="address" class="form-control form-control-lg"
+                                    value="<%= update[0].address %>" required>
+                            </div>
+
+                            <!-- Numbers -->
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label fw-semibold">
+                                        <i class="bi bi-telephone-fill text-danger me-2"></i>Emergency Helpline
+                                    </label>
+                                    <input type="text" name="helpline" class="form-control"
+                                        value="<%= update[0].helpline %>" required>
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label fw-semibold">
+                                        <i class="bi bi-headset text-danger me-2"></i>Administration Number
+                                    </label>
+                                    <input type="text" name="admin_number" class="form-control"
+                                        value="<%= update[0].admin_number %>" required>
+                                </div>
+                            </div>
+
+                            <!-- Fax -->
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">
+                                    <i class="bi bi-printer-fill text-danger me-2"></i>Fax Number
+                                </label>
+                                <input type="text" name="fax_number" class="form-control"
+                                    value="<%= update[0].fax_number %>" required>
+                            </div>
+
+                            <!-- Emails -->
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label fw-semibold">
+                                        <i class="bi bi-envelope-fill text-danger me-2"></i>General Email
+                                    </label>
+                                    <input type="email" name="email" class="form-control" value="<%= update[0].email %>"
+                                        required>
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label fw-semibold">
+                                        <i class="bi bi-envelope-exclamation-fill text-danger me-2"></i>Emergency Email
+                                    </label>
+                                    <input type="email" name="emergency_email" class="form-control"
+                                        value="<%= update[0].emergency_email %>" required>
+                                </div>
+                            </div>
+
+                            <!-- Embed Link -->
+                            <div class="mb-5">
+                                <label class="form-label fw-semibold">
+                                    <i class="bi bi-link-45deg text-danger me-2"></i>Google Map / Embed Link
+                                </label>
+                                <input type="text" name="embed_link" class="form-control"
+                                    value="<%= update[0].embed_link %>" required>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="d-flex justify-content-center gap-3">
+                                <button type="submit" class="btn btn-warning btn-lg px-5 shadow">
+                                    <i class="bi bi-pencil-square me-2"></i>Update
+                                </button>
+
+                                <a href="/admin/contact" class="btn btn-outline-secondary btn-lg px-5">
+                                    <i class="bi bi-arrow-left me-2"></i>Back
+                                </a>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <%- include('footer.ejs') %>

@@ -1,0 +1,167 @@
+<%- include('navbar.ejs') %>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h1 class="fw-bold mb-3" style="color: #8a0303;">Contact Us</h1>
+                <p class="text-muted">Get in touch with us. We're here to help 24/7</p>
+            </div>
+
+            <!-- Horizontal Forms Row -->
+            <div class="row">
+                <!-- Contact Form -->
+                <div class="col-md-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header text-white" style="background-color: #8a0303;">
+                            <h4 class="mb-0">
+                                <i class="bi bi-envelope me-2"></i>
+                                Send Us a Message
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="/contact_message" method="post">
+                                <div class="mb-3">
+                                    <label class="form-label">Your Name *</label>
+                                    <input type="text" name="contact_name" class="form-control"
+                                        placeholder="Enter your name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email Address *</label>
+                                    <input type="email" name="contact_email" class="form-control"
+                                        placeholder="your@email.com" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Subject</label>
+                                    <input type="text" name="contact_subject" class="form-control"
+                                        placeholder="What is this regarding?">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Message *</label>
+                                    <textarea class="form-control" name="message" rows="4"
+                                        placeholder="Type your message here..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-danger w-100">
+                                    <i class="bi bi-send me-2"></i>
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="col-md-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header text-white" style="background-color: #8a0303;">
+                            <h4 class="mb-0">
+                                <i class="bi bi-telephone me-2"></i>
+                                Contact Information
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-4">
+                                <h5 class="fw-bold" style="color: #8a0303;">
+                                    <i class="bi bi-geo-alt me-2"></i>
+                                    Our Address
+                                </h5>
+                                <p class="mb-0">
+                                    <%= contact[0].address %>
+                                </p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h5 class="fw-bold" style="color: #8a0303;">
+                                    <i class="bi bi-phone me-2"></i>
+                                    Phone Numbers
+                                </h5>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <strong>Emergency Helpline:</strong><br>
+                                        <%= contact[0].helpline %>
+                                    </li>
+                                    <li class="mb-2">
+                                        <strong>Administration:</strong><br>
+                                        <%= contact[0].admin_number %>
+                                    </li>
+                                    <li>
+                                        <strong>Fax:</strong>
+                                        <%= contact[0].fax_number %>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="mb-4">
+                                <h5 class="fw-bold" style="color: #8a0303;">
+                                    <i class="bi bi-envelope me-2"></i>
+                                    Email Address
+                                </h5>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <strong>General:</strong>
+                                        <%= contact[0].email %>
+                                    </li>
+                                    <li>
+                                        <strong>Emergency:</strong>
+                                        <%= contact[0].emergency_email %>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5 class="fw-bold" style="color: #8a0303;">
+                                    <i class="bi bi-clock me-2"></i>
+                                    Operating Hours
+                                </h5>
+                                <p class="mb-0">24/7 Emergency Services Available</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Contact -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="alert alert-danger text-center">
+                        <h5 class="mb-2">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            Emergency Blood Requirement?
+                        </h5>
+                        <p class="mb-2">Call our 24/7 emergency helpline immediately</p>
+                        <a href="tel:91-800-20012-333" class="btn btn-danger">
+                            <i class="bi bi-telephone me-2"></i>
+                            91-800-20012-333
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="mb-3" style="color: #8a0303;">Follow Us</h5>
+                            <div class="d-flex justify-content-center gap-3">
+                                <a href="https://www.facebook.com/" class="btn btn-outline-danger">
+                                    <i class="bi bi-facebook"></i>
+                                </a>
+                                <a href="https://x.com/" class="btn btn-outline-danger">
+                                    <i class="bi bi-twitter"></i>
+                                </a>
+                                <a href="https://www.instagram.com/" class="btn btn-outline-danger">
+                                    <i class="bi bi-instagram"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/feed/" class="btn btn-outline-danger">
+                                    <i class="bi bi-linkedin"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('footer.ejs') %>

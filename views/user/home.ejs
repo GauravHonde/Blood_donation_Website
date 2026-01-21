@@ -1,0 +1,786 @@
+<%- include ('navbar.ejs') %>
+
+    <!-- Hero Section with Background Image -->
+    <section class="hero">
+        <div>
+            <!-- <% for( var i=0; i < hero.length; i++) { %> -->
+            <h1>
+                <%= hero[i].add_quote %>
+            </h1>
+            <p>
+                <%= hero[i].para_quote %>
+            </p>
+            <a href="/#register" class="btn btn-danger mt-3">
+                <%= hero[i].button_name %>
+            </a>
+            <!-- <% } %> -->
+        </div>
+    </section>
+
+
+    <!-- Why Donate Blood -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-2">Why Donate Blood?</h2>
+            <p class="text-center text-muted mb-5">
+                A single donation can save up to 3 lives during emergencies
+            </p>
+
+            <div class="row g-4">
+                <!-- Card 1 -->
+                <% for( var i=0; i < why.length; i++) { %>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="card h-100 text-center shadow-sm border-0">
+                            <div class="card-img-top">
+                                <% if (why[i].image) { %>
+                                    <img src="/upload/why_donate/<%= why[i].image %>" class="img-fluid rounded-top"
+                                        alt="<%= why[i].title %>" style="height: 200px; object-fit: cover;">
+                                    <% } else { %>
+                                        <img src="/assets/img/donate.jpg" class="img-fluid rounded-top"
+                                            alt="Save lives through donation" style="height: 200px; object-fit: cover;">
+                                        <% } %>
+                            </div>
+                            <div class="card-body">
+                                <div class="bg-<%= why[i].color %> text-white rounded-circle d-inline-flex 
+                                    align-items-center justify-content-center mb-3"
+                                    style="width:70px;height:70px; margin-top: -35px;">
+                                    <i class="<%= why[i].icon %> fs-3"></i>
+                                </div>
+                                <h5 class="fw-semibold">
+                                    <%= why[i].title %>
+                                </h5>
+                                <p class="text-muted small">
+                                    <%= why[i].description %>
+                                </p>
+                                <!-- <div class="mt-3">
+                                <small class="text-danger"><i class="bi bi-clock me-1"></i> Donation takes only 10-15
+                                    minutes</small>
+                            </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Events Page -->
+    <!-- Events Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3" style="color: #8a0303;">Upcoming Blood Donation Camps</h2>
+                <p class="text-muted">Join our upcoming blood donation events in your area</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Camp 1 -->
+                <% for (var i=0; i < Math.min(camp.length, 3); i++) { %>
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="position-relative">
+                                <img src="/upload/donation_camp/<%= camp[i].image %>" class="card-img-top"
+                                    alt="Community Blood Drive" style="height: 200px; object-fit: cover;">
+                                <% if (camp[i].status) { %>
+                                    <span class="position-absolute top-0 end-0 m-2 badge 
+                                        <%= camp[i].status === 'Urgent' ? 'bg-danger' :
+                                            camp[i].status === 'Today' ? 'bg-danger' :
+                                            camp[i].status === 'New' ? 'bg-primary' :
+                                            camp[i].status === 'Upcoming' ? 'bg-warning text-dark' :
+                                            camp[i].status === 'Weekend' ? 'bg-success text-dark' :
+                                            'bg-secondary' %>">
+                                        <%= camp[i].status %>
+                                    </span>
+                                    <% } %>
+
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: #8a0303;">
+                                    <%= camp[i].title %>
+                                </h5>
+                                <div class="mb-3">
+                                    <p class="mb-1"><i class="bi bi-calendar me-2"></i><strong>Date:</strong>
+                                        <%= camp[i].date.toLocaleDateString('en-US', { day: '2-digit' , month: 'long' ,
+                                            year: 'numeric' }) %>
+                                    </p>
+                                    <p class="mb-1"><i class="bi bi-clock me-2"></i><strong>Time:</strong>
+                                        <% function to12Hour(time) { if (!time) return "" ; let [hours,
+                                            minutes]=time.split(":"); hours=parseInt(hours); let ampm=hours>= 12 ? "PM"
+                                            : "AM";
+                                            hours = hours % 12 || 12;
+
+                                            return hours + ":" + minutes + " " + ampm;
+                                            }
+                                            %>
+
+                                            <p class="mb-1">
+                                                <i class="bi bi-clock me-2"></i>
+                                                <strong>Time:</strong>
+                                                <%= to12Hour(camp[i].start_time) %>
+                                                    -
+                                                    <%= to12Hour(camp[i].end_time) %>
+                                            </p>
+
+
+                                    </p>
+                                    <p class="mb-0"><i class="bi bi-geo-alt me-2"></i><strong>Location:</strong>
+                                        <%= camp[i].location %>
+                                    </p>
+                                </div>
+                                <p class="card-text">
+                                    <%= about[i].description %>
+                                </p>
+                                <div class="mb-3">
+                                    <span class="badge bg-light text-dark"><i class="bi bi-award"></i> Free Health
+                                        Check</span>
+                                </div>
+                                <button class="btn w-100" style="background-color: #8a0303; color: white;">
+                                    <a href="/#register" class="text-white" style="text-decoration: none;"> Register
+                                        Now</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+
+
+            <!-- View More Button -->
+            <div class="text-center mt-5">
+                <a href="/donation_camp" class="btn btn-outline-danger px-4">
+                    <i class="bi bi-calendar-event me-2"></i>View All Events
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about-us py-5 bg-light">
+        <div class="container py-5">
+            <h2 class="text-center mb-5">About Us</h2>
+
+            <div class="row g-4">
+                <!-- Mission Card with Image -->
+                <% for ( var i=0; i < about.length; i++) { %>
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm border-1 overflow-hidden">
+                            <img src="/upload/about_us/<%= about[i].image %>" class="card-img-top" alt="Our Mission"
+                                style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h4 class="card-title text-danger blood-red">
+                                    <i class="bi bi-bullseye me-2"></i>
+                                    <%= about[i].title %>
+                                </h4>
+                                <p class="card-text">
+                                    <%= about[i].description %>
+                                </p>
+                                <div class="mt-3">
+                                    <h6 class="blood-red">
+                                        <%= about[i].focus_point_title %>:
+                                    </h6>
+                                    <ul class="list-unstyled">
+                                        <li><i class="bi bi-check-circle-fill text-success me-2"></i>
+                                            <%= about[i].focus_point_1 %>
+                                        </li>
+                                        </li>
+                                        <li><i class="bi bi-check-circle-fill text-success me-2"></i>
+                                            <%= about[i].focus_point_2 %>
+                                        </li>
+                                        <li><i class="bi bi-check-circle-fill text-success me-2"></i>
+                                            <%= about[i].focus_point_3 %>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+
+            <!-- Button Section -->
+            <div class="text-center mt-5">
+                <a href="about" class="btn btn-danger btn-lg px-5 py-3">
+                    <i class="bi bi-info-circle me-2"></i>More About Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Blood Types Information -->
+    <section class="py-5 my-5" style="background-color: rgb(242, 218, 222);">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="blood-red fw-bold">Blood Types Information</h2>
+                <p class="lead">Knowing your blood type is crucial for safe transfusions. Here's a comprehensive guide
+                    to blood types and their compatibility.</p>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="blood-red"><i class="bi bi-info-circle me-2"></i>Did You Know?</h5>
+                            <ul>
+                                <li>O- is the universal donor (can donate to all blood types)</li>
+                                <li>AB+ is the universal recipient (can receive from all blood types)</li>
+                                <li>Only 7% of people have O- blood type (most needed)</li>
+                                <li>Blood has a shelf life of only 42 days</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img src="./assets/img/brain.jpg" class="img-fluid rounded mb-3" alt="Blood types chart"
+                                style="height: 150px; object-fit: cover;">
+                            <h6 class="blood-red">Blood Compatibility Chart</h6>
+                            <p class="small">Download our complete compatibility guide</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="blood-type-card border-danger text-center position-relative overflow-hidden">
+                        <div class="blood-group bg-danger text-white">A+</div>
+                        <div class="p-3">
+                            <p class="mb-2"><strong>Can donate to:</strong> A+, AB+</p>
+                            <p class="mb-2"><strong>Can receive from:</strong> A+, A-, O+, O-</p>
+                            <div class="mt-3">
+                                <span class="badge bg-danger">37% of population</span>
+                                <span class="badge bg-info ms-1">Common</span>
+                            </div>
+                            <div class="mt-2">
+                                <small class="text-muted"><i class="bi bi-people me-1"></i> Most needed for cancer
+                                    patients</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="blood-type-card border-danger text-center position-relative overflow-hidden">
+                        <div class="blood-group bg-danger text-white">B+</div>
+                        <div class="p-3">
+                            <p class="mb-2"><strong>Can donate to:</strong> B+, AB+</p>
+                            <p class="mb-2"><strong>Can receive from:</strong> B+, B-, O+, O-</p>
+                            <div class="mt-3">
+                                <span class="badge bg-danger">10% of population</span>
+                                <span class="badge bg-secondary ms-1">Moderate</span>
+                            </div>
+                            <div class="mt-2">
+                                <small class="text-muted"><i class="bi bi-people me-1"></i> Common in Asian
+                                    populations</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="blood-type-card border-danger text-center position-relative overflow-hidden">
+                        <div class="blood-group bg-danger text-white">O+</div>
+                        <div class="p-3">
+                            <p class="mb-2"><strong>Can donate to:</strong> O+, A+, B+, AB+</p>
+                            <p class="mb-2"><strong>Can receive from:</strong> O+, O-</p>
+                            <div class="mt-3">
+                                <span class="badge bg-danger">36% of population</span>
+                                <span class="badge bg-success ms-1">Most Common</span>
+                            </div>
+                            <div class="mt-2">
+                                <small class="text-muted"><i class="bi bi-people me-1"></i> Most common blood
+                                    type</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="blood-type-card border-danger text-center position-relative overflow-hidden">
+                        <div class="blood-group bg-danger text-white">AB+</div>
+                        <div class="p-3">
+                            <p class="mb-2"><strong>Can donate to:</strong> AB+</p>
+                            <p class="mb-2"><strong>Can receive from:</strong> All blood types</p>
+                            <div class="mt-3">
+                                <span class="badge bg-danger">4% of population</span>
+                                <span class="badge bg-warning ms-1">Rare</span>
+                            </div>
+                            <div class="mt-2">
+                                <small class="text-muted"><i class="bi bi-people me-1"></i> Universal recipient</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <!-- Negative blood types with similar enhanced styling -->
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="blood-type-card border-danger text-center position-relative overflow-hidden">
+                        <div class="blood-group bg-dark text-white">A-</div>
+                        <div class="p-3">
+                            <p class="mb-2"><strong>Can donate to:</strong> A+, A-, AB+, AB-</p>
+                            <p class="mb-2"><strong>Can receive from:</strong> A-, O-</p>
+                            <div class="mt-3">
+                                <span class="badge bg-dark">7% of population</span>
+                                <span class="badge bg-info ms-1">Valuable</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="blood-type-card border-danger text-center position-relative overflow-hidden">
+                        <div class="blood-group bg-dark text-white">B-</div>
+                        <div class="p-3">
+                            <p class="mb-2"><strong>Can donate to:</strong> B+, B-, AB+, AB-</p>
+                            <p class="mb-2"><strong>Can receive from:</strong> B-, O-</p>
+                            <div class="mt-3">
+                                <span class="badge bg-dark">2% of population</span>
+                                <span class="badge bg-warning ms-1">Very Rare</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="blood-type-card border-danger text-center position-relative overflow-hidden">
+                        <div class="blood-group bg-dark text-white">O-</div>
+                        <div class="p-3">
+                            <p class="mb-2"><strong>Can donate to:</strong> All blood types</p>
+                            <p class="mb-2"><strong>Can receive from:</strong> O-</p>
+                            <div class="mt-3">
+                                <span class="badge bg-dark">3% of population</span>
+                                <span class="badge bg-danger ms-1">Most Needed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="blood-type-card border-danger text-center position-relative overflow-hidden">
+                        <div class="blood-group bg-dark text-white">AB-</div>
+                        <div class="p-3">
+                            <p class="mb-2"><strong>Can donate to:</strong> AB+, AB-</p>
+                            <p class="mb-2"><strong>Can receive from:</strong> AB-, A-, B-, O-</p>
+                            <div class="mt-3">
+                                <span class="badge bg-dark">1% of population</span>
+                                <span class="badge bg-warning ms-1">Rarest</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blood Type Distribution Chart -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="blood-red text-center mb-4">
+                                <i class="bi bi-pie-chart me-2"></i>Blood Type Distribution Worldwide
+                            </h5>
+                            <div class="row text-center">
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 border rounded">
+                                        <h6 class="text-danger">O+</h6>
+                                        <h4>36%</h4>
+                                        <small>Most Common</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 border rounded">
+                                        <h6 class="text-danger">A+</h6>
+                                        <h4>28%</h4>
+                                        <small>Second Most</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 border rounded">
+                                        <h6 class="text-danger">B+</h6>
+                                        <h4>20%</h4>
+                                        <small>Third Most</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 border rounded">
+                                        <h6 class="text-danger">AB+</h6>
+                                        <h4>5%</h4>
+                                        <small>Least Common</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="/blood_list" class="btn btn-danger btn-lg px-5 py-3">
+                    <i class="bi bi-info-circle me-2"></i>View More Details
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donor Registration -->
+    <section id="register" class="pt-5 pb-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="blood-red fw-bold">Become a Lifesaver</h2>
+                <p class="lead">Join our community of heroes. Registration takes only 2 minutes.</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+                    <!-- Card -->
+                    <div class="card shadow-lg border-0 overflow-hidden">
+                        <div class="row g-0">
+                            <div class="col-md-5 d-none d-md-block">
+                                <img src="./assets/img/request.jpg" class="img-fluid h-100" alt="Donor Registration"
+                                    style="object-fit: cover;">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-header text-white text-center py-4"
+                                    style="background-color: rgb(138, 3, 3);">
+                                    <h4 class="mb-0"><i class="bi bi-person-plus me-2"></i>Donor Registration</h4>
+                                </div>
+                                <div class="card-body p-4">
+                                    <!-- Donor Registration Form -->
+                                    <form action="/save_register" method="post">
+                                        <!-- Donor Name -->
+                                        <div class="mb-3">
+                                            <label class="form-label">
+                                                <i class="bi bi-person me-2"></i>Donor Name
+                                            </label>
+                                            <input type="text" name="donar_name" class="form-control"
+                                                placeholder="Enter your full name" required>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Age</label>
+                                                <input type="number" class="form-control" min="18" max="65"
+                                                    placeholder="18-65" name="donar_age" required>
+                                                <small class="text-muted">Must be 18-65 years</small>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Gender</label>
+                                                <select class="form-select" name="donar_gender" required>
+                                                    <option value="">Select Gender</option>
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Blood Group -->
+                                        <div class="mb-3">
+                                            <label class="form-label">
+                                                <i class="bi bi-droplet me-2"></i>Blood Group
+                                            </label>
+                                            <select class="form-select" name="donar_blood_group" required>
+                                                <option value="">Select Blood Group</option>
+                                                <option value="A+">A+</option>
+                                                <option value="A-">A-</option>
+                                                <option value="B+">B+</option>
+                                                <option value="B-">B-</option>
+                                                <option value="AB+">AB+</option>
+                                                <option value="AB-">AB-</option>
+                                                <option value="O+">O+</option>
+                                                <option value="O-">O-</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">
+                                                    <i class="bi bi-telephone me-2"></i>Phone Number
+                                                </label>
+                                                <input type="tel" name="donar_mobile_number" class="form-control"
+                                                    placeholder="+91 (555) 123-4567" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">
+                                                    <i class="bi bi-envelope me-2"></i>Email Address
+                                                </label>
+                                                <input type="email" name="donar_email_id" class="form-control"
+                                                    placeholder="your@email.com">
+                                            </div>
+                                        </div>
+
+                                        <!-- City / Location -->
+                                        <div class="mb-3">
+                                            <label class="form-label">
+                                                <i class="bi bi-geo-alt me-2"></i>City / Location
+                                            </label>
+                                            <input type="text" name="donar_city" class="form-control"
+                                                placeholder="Enter your city">
+                                        </div>
+
+                                        <!-- Last Donation Date -->
+                                        <div class="mb-3">
+                                            <label class="form-label">
+                                                <i class="bi bi-calendar me-2"></i>Last Donation Date
+                                            </label>
+                                            <input type="date" name="date" class="form-control">
+                                            <small class="text-muted">If applicable, leave blank if first time
+                                                donor</small>
+                                        </div>
+
+                                        <!-- Health Declaration -->
+                                        <div class="mb-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="healthDeclaration"
+                                                    required>
+                                                <label class="form-check-label small" for="healthDeclaration">
+                                                    I declare that I am in good health, free from infectious diseases,
+                                                    and meet all donor eligibility criteria.
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Submit Button -->
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-danger btn-lg py-3">
+                                                <i class="bi bi-heart-pulse me-2"></i>Register as Donor
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blood Request -->
+    <section id="blood-request" class="bg-light py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="blood-red fw-bold">Emergency Blood Request</h2>
+                <p class="lead">Need blood urgently? We're here to help 24/7.</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+                    <!-- Card -->
+                    <div class="card shadow-lg border-0">
+                        <div class="card-header text-white text-center py-4" style="background-color: rgb(138, 3, 3);">
+                            <h4 class="mb-0"><i class="bi bi-bell me-2"></i>Emergency Blood Request Form</h4>
+                        </div>
+                        <div class="card-body p-4">
+                            <!-- Blood Request Form -->
+                            <form action="/request_donar" method="post">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Patient Name</label>
+                                        <input type="text" name="patient_name" class="form-control"
+                                            placeholder="Enter patient name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Required Blood Group</label>
+                                        <select class="form-select" name="required_blood" required>
+                                            <option value="">Select Blood Group</option>
+                                            <option value="A+">A+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="AB-">AB-</option>
+                                            <option value="O+">O+</option>
+                                            <option value="O-">O-</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Quantity -->
+                                <div class="mb-3">
+                                    <label class="form-label">Quantity Required (Units)</label>
+                                    <div class="input-group">
+                                        <input type="number" name="quantity_required" class="form-control" min="1"
+                                            placeholder="Required units" required>
+                                        <span class="input-group-text">Units</span>
+                                    </div>
+                                    <small class="text-muted">1 unit = 450ml of blood</small>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Hospital Name</label>
+                                        <input type="text" name="hospital_name" class="form-control"
+                                            placeholder="Enter hospital name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">City / Location</label>
+                                        <input type="text" name="city_location" class="form-control"
+                                            placeholder="Enter city or area" required>
+                                    </div>
+                                </div>
+
+                                <!-- Contact Person & Phone -->
+                                <div class="mb-3">
+                                    <label class="form-label">Contact Person & Phone Number</label>
+                                    <div class="input-group">
+                                        <!-- <input type="text" name="contact_number" class="form-control"
+                                            placeholder="Contact person name" required> -->
+                                        <input type="tel" name="phone_number" class="form-control"
+                                            placeholder="Phone number" required>
+                                    </div>
+                                </div>
+
+                                <!-- Urgency Level -->
+                                <div class="mb-4">
+                                    <label class="form-label">Urgency Level</label>
+                                    <select class="form-select" name="urgency_level" required>
+                                        <option value="">Select urgency level</option>
+                                        <option value="critical" class="text-danger">🚨 Critical (Immediate - Within 1
+                                            hour)</option>
+                                        <option value="high" class="text-warning">⚠️ High (Within 24 Hours)</option>
+                                        <option value="normal" class="text-primary">📋 Normal (Within 72 Hours)</option>
+                                    </select>
+                                </div>
+
+                                <!-- Additional Information -->
+                                <div class="mb-4">
+                                    <label class="form-label">Additional Information</label>
+                                    <textarea class="form-control" rows="3"
+                                        placeholder="Any special requirements or additional details..."
+                                        name="additional_information"></textarea>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-danger btn-lg py-3">
+                                        <i class="bi bi-send me-2"></i>Submit Blood Request
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Us -->
+    <section class="pt-5 pb-5 my-4" style="background-color: rgb(247, 249, 250);">
+        <div class="container">
+            <h2 class="text-center mb-5 blood-red fw-bold">Contact Us</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h4 class="card-title blood-red mb-4">
+                                <i class="bi bi-chat-dots me-2"></i>Get in Touch
+                            </h4>
+                            <form id="contactForm" action="/contact_message" method="post">
+                                <div class="mb-3">
+                                    <label for="contactName" class="form-label">Your Name *</label>
+                                    <input type="text" name="contact_name" class="form-control" id="contactName"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactEmail" class="form-label">Email Address *</label>
+                                    <input type="email" name="contact_email" class="form-control" id="contactEmail"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactSubject" class="form-label">Subject</label>
+                                    <input type="text" name="contact_subject" class="form-control" id="contactSubject">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactMessage" class="form-label">Message *</label>
+                                    <textarea class="form-control" name="message" id="contactMessage" rows="4"
+                                        required></textarea>
+                                </div>
+                                <button class="btn btn-danger px-4 py-2">
+                                    <i class="bi bi-send me-2"></i>Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h4 class="card-title blood-red mb-4">
+                                <i class="bi bi-info-circle me-2"></i>Contact Information
+                            </h4>
+                            <% for (var i=0; i< contact.length; i++) { %>
+                                <div class="row">
+                                    <div class="col-12 mb-4">
+                                        <div class="d-flex align-items-start">
+                                            <div class="bg-danger text-white rounded-circle p-3 me-3">
+                                                <i class="bi bi-geo-alt fs-4"></i>
+                                            </div>
+                                            <div>
+                                                <h5 class="blood-red">Office Address</h5>
+                                                <p class="mb-0">
+                                                    <%= contact[i].address %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-4">
+                                        <div class="d-flex align-items-start">
+                                            <div class="bg-danger text-white rounded-circle p-3 me-3">
+                                                <i class="bi bi-telephone fs-4"></i>
+                                            </div>
+                                            <div>
+                                                <h5 class="blood-red">Phone Numbers</h5>
+                                                <p class="mb-0">
+                                                    <strong>Emergency Helpline:</strong>
+                                                    <%= contact[i].helpline %><br>
+                                                        <strong>Administration:</strong>
+                                                        <%= contact[i].admin_number %> <br>
+                                                            <strong>Fax:</strong>
+                                                            <%= contact[i].fax_number %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-start">
+                                            <div class="bg-danger text-white rounded-circle p-3 me-3">
+                                                <i class="bi bi-envelope fs-4"></i>
+                                            </div>
+                                            <div>
+                                                <h5 class="blood-red">Email & Hours</h5>
+                                                <p class="mb-0">
+                                                    <strong>Email:</strong>
+                                                    <%= contact[i].email %><br>
+                                                        <strong>Emergency:</strong>
+                                                        <%= contact[i].emergency_email %><br>
+                                                            <strong>Hours:</strong> 24/7 Emergency Services
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Map Placeholder -->
+                                <div class="mt-4">
+                                    <div class="border rounded overflow-hidden"
+                                        style="height: 200px; background: #e9ecef;">
+
+                                        <iframe src="<%= contact[i].embed_link %>" width="100%" height="200"
+                                            style="border:0;" allowfullscreen="" loading="lazy"
+                                            referrerpolicy="no-referrer-when-downgrade">
+                                        </iframe>
+
+                                    </div>
+                                </div>
+
+                                <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <%- include ('footer.ejs') %>

@@ -1,0 +1,92 @@
+<%- include('navbar.ejs') %>
+
+    <div class="container mt-4">
+        <div class="card shadow">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-people-fill me-2"></i> Donor List
+                </h5>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover align-middle text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Sr No</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Blood Group</th>
+                                <th>Mobile</th>
+                                <th>Email</th>
+                                <th>City</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% if(donar.length> 0){ %>
+                                <% for (var i=0; i < donar.length; i++) { %>
+                                    <tr>
+                                        <td>
+                                            <%= i + 1 %>
+                                        </td>
+                                        <td>
+                                            <%= donar[i].donar_name %>
+                                        </td>
+                                        <td>
+                                            <%= donar[i].donar_age %>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-primary">
+                                                <%= donar[i].donar_gender %>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-danger">
+                                                <%= donar[i].donar_blood_group %>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <%= donar[i].donar_mobile_number %>
+                                        </td>
+                                        <td>
+                                            <%= donar[i].donar_email_id %>
+                                        </td>
+                                        <td>
+                                            <%= donar[i].donar_city %>
+                                        </td>
+                                        <td>
+                                            <%= new Date(donar[i].date).toLocaleDateString('en-CA') %>
+                                        </td>
+                                        <td>
+                                            <a href="/admin/edit_doner/<%= donar[i].donar_id %>"
+                                                class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a href="/admin/delete_doner/<%= donar[i].donar_id %>"
+                                                class="btn btn-outline-danger btn-sm">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </td>
+                                    
+
+                                    </tr>
+                                    <% } %>
+                                        <% } else { %>
+                                            <tr>
+                                                <td colspan="9" class="text-muted text-center">
+                                                    No Donor Records Found
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('footer.ejs') %>

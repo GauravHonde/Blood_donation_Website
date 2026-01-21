@@ -1,0 +1,143 @@
+<%- include('navbar.ejs') %>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-danger text-white text-center">
+                        <h4 class="mb-0">
+                            <i class="bi bi-image"></i> Add New Hero Section
+                        </h4>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <form action="/admin/save_hero_data" method="post" enctype="multipart/form-data">
+
+                            <!-- Hero Image -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Hero Image</label>
+                                <input type="file" name="hero_image" class="form-control" required>
+                            </div>
+
+                            <!-- Main Quote -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Main Quote</label>
+                                <input type="text" name="add_quote" class="form-control" placeholder="Enter main quote"
+                                    required>
+                            </div>
+
+                            <!-- Paragraph Quote -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Paragraph Quote</label>
+                                <textarea name="para_quote" class="form-control" rows="3"
+                                    placeholder="Enter paragraph quote" required></textarea>
+                            </div>
+
+                            <!-- Button Name -->
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Button Text</label>
+                                <input type="text" name="button_name" class="form-control" placeholder="Eg: Donate Now"
+                                    required>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-danger btn-lg">
+                                    <i class="bi bi-save"></i> Save Hero Data
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mt-4">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-table"></i> Hero Section Data
+                </h5>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover align-middle text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Sr No</th>
+                                <th>Hero Image</th>
+                                <th>Main Quote</th>
+                                <th>Paragraph Quote</th>
+                                <th>Button Name</th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% if (info && info.length) { %>
+                                <% for (var i=0; i < info.length; i++) { %>
+                                    <tr>
+                                        <td class="fw-bold">
+                                            <%= i + 1 %>
+                                        </td>
+
+                                        <td>
+                                            <% if (info[i].hero_image) { %>
+                                                <img src="/upload/<%= info[i].hero_image %>" alt="Hero Image"
+                                                    class="img-thumbnail shadow-sm" style="max-width: 120px;">
+                                                <% } else { %>
+                                                    <span class="badge bg-secondary">N/A</span>
+                                                    <% } %>
+                                        </td>
+
+                                        <td class="fw-semibold">
+                                            <%= info[i].add_quote %>
+                                        </td>
+
+                                        <td class="text-muted text-start">
+                                            <%= info[i].para_quote %>
+                                        </td>
+
+                                        <td>
+                                            <span class="badge bg-success fs-6">
+                                                <%= info[i].button_name %>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a href="/admin/edit_hero/<%= info[i].hero_id %>"
+                                                class="btn btn-sm btn-outline-primary me-1">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+
+                                            <a href="/admin/delete_hero/<%= info[i].hero_id %>"
+                                                class="btn btn-sm btn-outline-danger"
+                                                onclick="return confirm('Delete this hero section?')">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </td>
+
+                                    </tr>
+                                    <% } %>
+                                        <% } else { %>
+                                            <tr>
+                                                <td colspan="5" class="text-center text-danger fw-bold">
+                                                    No hero data available
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <%- include('footer.ejs') %>

@@ -1,0 +1,187 @@
+<%- include('navbar.ejs') %>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-danger text-white text-center">
+                        <h4 class="mb-0">
+                            <i class="bi bi-info-circle-fill me-2"></i>
+                            Add About Us Details
+                        </h4>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <form action="/admin/about_list" method="post" enctype="multipart/form-data">
+
+                            <!-- Image -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">
+                                    <i class="bi bi-image me-2"></i>Upload Image
+                                </label>
+                                <input type="file" name="image" class="form-control" required>
+                            </div>
+
+                            <!-- Main Title -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">
+                                    <i class="bi bi-type me-2"></i>Main Title
+                                </label>
+                                <input type="text" name="title" class="form-control" placeholder="Enter main title"
+                                    required>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">
+                                    <i class="bi bi-card-text me-2"></i>Description
+                                </label>
+                                <textarea name="description" class="form-control" rows="4"
+                                    placeholder="Write about your organization" required></textarea>
+                            </div>
+
+                            <!-- Focus Points Title -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">
+                                    <i class="bi bi-bullseye me-2"></i>Focus Points Title
+                                </label>
+                                <input type="text" name="focus_point_title" class="form-control"
+                                    placeholder="Our Key Focus Areas" required>
+                            </div>
+
+                            <!-- Focus Points -->
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label fw-semibold">
+                                        <i class="bi bi-check-circle me-1"></i>Focus Point 1
+                                    </label>
+                                    <input type="text" name="focus_point_1" class="form-control" required>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label fw-semibold">
+                                        <i class="bi bi-check-circle me-1"></i>Focus Point 2
+                                    </label>
+                                    <input type="text" name="focus_point_2" class="form-control" required>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label fw-semibold">
+                                        <i class="bi bi-check-circle me-1"></i>Focus Point 3
+                                    </label>
+                                    <input type="text" name="focus_point_3" class="form-control" required>
+                                </div>
+                            </div>
+
+
+
+                            <!-- Submit Button -->
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-danger px-5">
+                                    <i class="bi bi-save me-2"></i>Save Details
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="card shadow border-0">
+            <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="bi bi-info-circle-fill me-2"></i>About Us Details
+                </h5>
+                <a href="/admin/about_us" class="btn btn-light btn-sm">
+                    <i class="bi bi-plus-circle me-1"></i>Add New
+                </a>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered align-middle mb-0">
+                        <thead class="table-danger text-center">
+                            <tr>
+                                <th>#</th>
+                                <th>Image</th>
+                                <th>Main Title</th>
+                                <th>Description</th>
+                                <th>Focus Title</th>
+                                <th>Point 1</th>
+                                <th>Point 2</th>
+                                <th>Point 3</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% if(info.length===0) { %>
+                                <tr>
+                                    <td colspan="9" class="text-center text-muted py-4">
+                                        <i class="bi bi-inbox me-2"></i>No data found
+                                    </td>
+                                </tr>
+                                <% } %>
+
+                                    <% for(var i=0; i < info.length; i++) { var item=info[i]; %>
+                                        <tr>
+                                            <td class="text-center fw-bold">
+                                                <%= i + 1 %>
+                                            </td>
+
+                                            <td class="text-center">
+                                                <img src="/upload/about_us/<%= item.image %>" class="rounded shadow-sm"
+                                                    width="80" height="60" style="object-fit: cover;">
+                                            </td>
+
+                                            <td class="fw-semibold">
+                                                <%= item.title %>
+                                            </td>
+
+                                            <td style="max-width:250px;">
+                                                <%= item.description.length> 80
+                                                    ? item.description.substring(0, 80) + '...'
+                                                    : item.description %>
+                                            </td>
+
+                                            <td class="text-danger fw-semibold">
+                                                <%= item.focus_point_title %>
+                                            </td>
+
+                                            <td>
+                                                <%= item.focus_point_1 %>
+                                            </td>
+                                            <td>
+                                                <%= item.focus_point_2 %>
+                                            </td>
+                                            <td>
+                                                <%= item.focus_point_3 %>
+                                            </td>
+
+                                            <!-- Actions -->
+                                            <td class="text-center">
+                                                <div class="d-inline-flex gap-1">
+                                                    <a href="/admin/about_edit/<%= item.about_id %>"
+                                                        class="btn btn-sm btn-success">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </a>
+
+                                                    <a href="/admin/delete_about/<%= item.about_id %>"
+                                                        class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Are you sure you want to delete this record?');">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <%- include('footer.ejs') %>

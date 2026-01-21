@@ -1,0 +1,102 @@
+/* Transparent Navbar */
+.navbar {
+
+    background: rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease;
+}
+
+/* Navbar after scroll */
+.navbar.scrolled {
+    background: #ea8484;
+    /* Blood red */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: #fff !important;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #ffd6d6 !important;
+}
+
+/* Hero section */
+.hero {
+    height: 100vh !important;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('../img/donate.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.blood-group-badge {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white;
+    margin: 0 auto 15px;
+}
+
+/* Blood Types Cards */
+.blood-type-card {
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s;
+    height: 100%;
+}
+
+.blood-type-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-red);
+}
+
+.blood-group {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-red);
+    margin-bottom: 0.5rem;
+}
+
+/* Footer */
+
+footer {
+    background-color: #222;
+    color: #ddd;
+    padding: 3rem 0 1.5rem;
+}
+
+.footer-links a {
+    color: #ddd;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    border-top: 1px solid #444;
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+    text-align: center;
+}

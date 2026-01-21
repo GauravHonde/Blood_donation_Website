@@ -1,0 +1,95 @@
+<%- include('navbar.ejs') %>
+
+    <form action="/admin/update_donar_request/<%= result[0].patient_id %>" method="POST">
+
+        <!-- Patient Name & Blood Group -->
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Patient Name</label>
+                <input type="text" name="patient_name" class="form-control" value="<%= result[0].patient_name %>"
+                    required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Required Blood Group</label>
+                <select class="form-select" name="required_blood" required>
+                    <option value="">Select Blood Group</option>
+                    <% ['A+','A-','B+','B-','AB+','AB-','O+','O-'].forEach(bg=> { %>
+                        <option value="<%= bg %>" <%=result[0].required_blood===bg ? 'selected' : '' %>>
+                            <%= bg %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+        </div>
+
+        <!-- Quantity -->
+        <div class="mb-3">
+            <label class="form-label">Quantity Required (Units)</label>
+            <div class="input-group">
+                <input type="number" name="quantity_required" class="form-control" min="1"
+                    value="<%= result[0].quantity_required %>" required>
+                <span class="input-group-text">Units</span>
+            </div>
+            <small class="text-muted">1 unit = 450ml of blood</small>
+        </div>
+
+        <!-- Hospital & City -->
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Hospital Name</label>
+                <input type="text" name="hospital_name" class="form-control" value="<%= result[0].hospital_name %>"
+                    required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">City / Location</label>
+                <input type="text" name="city_location" class="form-control" value="<%= result[0].city_location %>"
+                    required>
+            </div>
+        </div>
+
+        <!-- Contact Number -->
+        <div class="mb-3">
+            <label class="form-label">Contact Phone Number</label>
+            <input type="tel" name="phone_number" class="form-control" value="<%= result[0].phone_number %>" required>
+        </div>
+
+        <!-- Urgency -->
+        <div class="mb-4">
+            <label class="form-label">Urgency Level</label>
+            <select class="form-select" name="urgency_level" required>
+                <option value="">Select urgency level</option>
+                <option value="Critical" <%=result[0].urgency_level==='Critical' ? 'selected' : '' %>>
+                    🚨 Critical (Immediate)
+                </option>
+                <option value="High" <%=result[0].urgency_level==='High' ? 'selected' : '' %>>
+                    ⚠️ High (Within 24 Hours)
+                </option>
+                <option value="Normal" <%=result[0].urgency_level==='Normal' ? 'selected' : '' %>>
+                    📋 Normal (Within 72 Hours)
+                </option>
+            </select>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="mb-4">
+            <label class="form-label">Additional Information</label>
+            <textarea class="form-control" rows="3"
+                name="additional_information"><%= result[0].additional_information %></textarea>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex gap-3">
+            <button type="submit" class="btn btn-success btn-lg text-white">
+                <i class="bi bi-check-circle me-2"></i>Update Request
+            </button>
+
+            <a href="/admin/donar_request" class="btn btn-secondary btn-lg">
+                <i class="bi bi-arrow-left me-2"></i>Cancel
+            </a>
+        </div>
+
+    </form>
+
+    <%- include('footer.ejs') %>

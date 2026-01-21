@@ -1,0 +1,69 @@
+<%- include('navbar.ejs') %>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h4 class="mb-0">
+                            <i class="bi bi-pencil-square"></i> Edit Hero Section
+                        </h4>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <form action="/admin/update_hero" method="post" enctype="multipart/form-data">
+
+                            <input type="hidden" name="hero_id" value="<%= info[0].hero_id %>">
+
+                            <!-- Existing Image -->
+                            <div class="mb-3 text-center">
+                                <% if (info[0].hero_image) { %>
+                                    <img src="/upload/<%= info[0].hero_image %>" class="img-thumbnail mb-2"
+                                        style="max-width:150px;">
+                                    <% } %>
+                            </div>
+
+                            <!-- Change Image -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Change Hero Image</label>
+                                <input type="file" name="hero_image" class="form-control">
+                            </div>
+
+                            <!-- Main Quote -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Main Quote</label>
+                                <input type="text" name="add_quote" class="form-control" value="<%= info[0].add_quote %>"
+                                    required>
+                            </div>
+
+                            <!-- Paragraph Quote -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Paragraph Quote</label>
+                                <textarea name="para_quote" class="form-control" rows="3"
+                                    required><%= info[0].para_quote %></textarea>
+                            </div>
+
+                            <!-- Button Name -->
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Button Text</label>
+                                <input type="text" name="button_name" class="form-control"
+                                    value="<%= info[0].button_name %>" required>
+                            </div>
+
+                            <!-- Update Button -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-arrow-repeat"></i> Update Hero Data
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <%- include('footer.ejs') %>

@@ -1,0 +1,91 @@
+<%- include('navbar.ejs') %>
+    <form action="/admin/update_donor/<%= info[0].donar_id %>" method="post">
+        <!-- <input type="hidden" name="donar_id" value="<%= info[0].donar_id %>"> -->
+
+        <!-- Donor Name -->
+        <div class="mb-3">
+            <label class="form-label">
+                <i class="bi bi-person me-2"></i>Donor Name
+            </label>
+            <input type="text" name="donar_name" class="form-control" value="<%= info[0].donar_name %>" required>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Age</label>
+                <input type="number" name="donar_age" class="form-control" min="18" max="65"
+                    value="<%= info[0].donar_age %>" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Gender</label>
+                <select class="form-select" name="donar_gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="male" <%=info[0].donar_gender==='male' ? 'selected' : '' %>>Male</option>
+                    <option value="female" <%=info[0].donar_gender==='female' ? 'selected' : '' %>>Female</option>
+                    <option value="other" <%=info[0].donar_gender==='other' ? 'selected' : '' %>>Other</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Blood Group -->
+        <div class="mb-3">
+            <label class="form-label">
+                <i class="bi bi-droplet me-2"></i>Blood Group
+            </label>
+            <select class="form-select" name="donar_blood_group" required>
+                <% ['A+','A-','B+','B-','AB+','AB-','O+','O-'].forEach(bg=> { %>
+                    <option value="<%= bg %>" <%=info[0].donar_blood_group===bg ? 'selected' : '' %>>
+                        <%= bg %>
+                    </option>
+                    <% }) %>
+            </select>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">
+                    <i class="bi bi-telephone me-2"></i>Phone Number
+                </label>
+                <input type="tel" name="donar_mobile_number" class="form-control"
+                    value="<%= info[0].donar_mobile_number %>" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">
+                    <i class="bi bi-envelope me-2"></i>Email Address
+                </label>
+                <input type="email" name="donar_email_id" class="form-control" value="<%= info[0].donar_email_id %>">
+            </div>
+        </div>
+
+        <!-- City -->
+        <div class="mb-3">
+            <label class="form-label">
+                <i class="bi bi-geo-alt me-2"></i>City / Location
+            </label>
+            <input type="text" name="donar_city" class="form-control" value="<%= info[0].donar_city %>">
+        </div>
+
+        <!-- Last Donation Date -->
+        <div class="mb-4">
+            <label class="form-label">
+                <i class="bi bi-calendar me-2"></i>Last Donation Date
+            </label>
+            <input type="date" name="date" class="form-control" value="<%= info[0].date.toISOString().split('T')[0] %>">
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary btn-lg">
+                <i class="bi bi-pencil-square me-2"></i>Update Donor
+            </button>
+
+            <a href="/admin/donor_list" class="btn btn-secondary btn-lg">
+                Cancel
+            </a>
+        </div>
+
+    </form>
+
+    <% include('footer.ejs') %>

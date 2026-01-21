@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blood Donation Navbar</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="./assets/css/style.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+
+        <div class="container">
+            <a class="navbar-brand text-white" href="#">
+                <i class="bi bi-droplet-fill" style="color: rgb(138, 3, 3);">LifeBlood</i>
+            </a>
+
+            <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/donation_camp">Donation Camp</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/blood_list">Blood List</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/blood_request">Blood Request</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact_us">Contact Us</a></li>
+
+                    <li class="nav-item">
+                        <button class="btn btn-light text-danger ms-2" data-bs-toggle="modal"
+                            data-bs-target="#registerModal">
+                            Register
+                        </button>
+                    </li>
+                    <button class="btn btn-danger ms-2">
+                        <a href="/admin/login" class="text-white text-decoration-none">Admin Login</a>
+                    </button>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Simple Registration Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">
+                        <i class="bi bi-person-plus me-2"></i>Donor Registration
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/register_camp" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" name="full_name" class="form-control" placeholder="Enter your name"
+                                required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Age</label>
+                                <input type="number" name="age" class="form-control" min="18" max="65"
+                                    placeholder="18-65" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Blood Group</label>
+                                <select class="form-select" name="bood_group" required>
+                                    <option value="">Select Blood Group</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" name="phone_number" class="form-control" placeholder="Phone number"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">City</label>
+                            <input type="text" name="city" class="form-control" placeholder="Your city" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Camp Name</label>
+                            <input type="text" name="camp_name" class="form-control" placeholder="Camp Name" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-heart-pulse me-2"></i>Register
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener("scroll", function () {
+            const navbar = document.querySelector(".navbar");
+            navbar.classList.toggle("scrolled", window.scrollY > 50);
+        });
+    </script>

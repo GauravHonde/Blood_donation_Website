@@ -1,0 +1,73 @@
+<%- include('navbar.ejs') %>
+
+    <div class="container mt-5">
+        <div class="card shadow border-0">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-pencil-square me-2"></i>
+                    Edit "Why Donate Blood" Card
+                </h5>
+            </div>
+
+            <div class="card-body">
+                <form action="/admin/update_why_donate/<%= info[0].id %>" method="POST" enctype="multipart/form-data">
+
+                    <!-- Card Title -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Card Title</label>
+                        <input type="text" name="title" class="form-control" value="<%= info[0].title %>" required>
+                    </div>
+
+                    <!-- Card Description -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Description</label>
+                        <textarea name="description" class="form-control" rows="4"
+                            required><%= info[0].description %></textarea>
+                    </div>
+
+                    <!-- Bootstrap Icon -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Bootstrap Icon Class</label>
+                        <input type="text" name="icon" class="form-control" value="<%= info[0].icon %>" required>
+                    </div>
+
+                    <!-- Badge Color -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Badge Color</label>
+                        <select name="color" class="form-select" required>
+                            <option value="">-- Select Color --</option>
+                            <option value="danger" <%=info[0].color==='danger' ? 'selected' : '' %>>Red</option>
+                            <option value="primary" <%=info[0].color==='primary' ? 'selected' : '' %>>Blue</option>
+                            <option value="success" <%=info[0].color==='success' ? 'selected' : '' %>>Green</option>
+                            <option value="warning" <%=info[0].color==='warning' ? 'selected' : '' %>>Yellow
+                            </option>
+                            <option value="info" <%=info[0].color==='info' ? 'selected' : '' %>>Info</option>
+                        </select>
+                    </div>
+
+                    <!-- New Image -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Change Image (optional)</label>
+                        <input type="file" name="image" class="form-control" accept="image/*">
+                        <small class="text-muted">Leave empty to keep old image</small>
+                    </div>
+
+                    <!-- Hidden old image -->
+                    <input type="hidden" name="old_image" value="<%= info[0].image %>">
+
+                    <!-- Submit -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary px-5">
+                            <i class="bi bi-save me-2"></i>Update Card
+                        </button>
+                        <a href="/admin/why_donate" class="btn btn-secondary ms-2">
+                            Cancel
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include('footer.ejs') %>

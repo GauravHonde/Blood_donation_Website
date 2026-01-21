@@ -1,0 +1,163 @@
+<%- include ('navbar.ejs') %>
+
+    <!-- Events Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3" style="color: #8a0303;">Upcoming Blood Donation Camps</h2>
+                <p class="text-muted">Join our upcoming blood donation events in your area. Help save lives!</p>
+            </div>
+
+
+            <!-- Events Grid -->
+            <div class="row g-4">
+                <!-- Camp 1 -->
+                <% for(var i=0; i < camp.length; i++) { %>
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="position-relative">
+                                <img src="/upload/donation_camp/<%= camp[i].image %>" class="card-img-top"
+                                    alt="Community Blood Drive" style="height: 200px; object-fit: cover;">
+                                <% if (camp[i].status) { %>
+                                    <span class="position-absolute top-0 end-0 m-2 badge 
+                                        <%= camp[i].status === 'Urgent' ? 'bg-danger' :
+                                            camp[i].status === 'Today' ? 'bg-danger' :
+                                            camp[i].status === 'New' ? 'bg-primary' :
+                                            camp[i].status === 'Upcoming' ? 'bg-warning text-dark' :
+                                            camp[i].status === 'Weekend' ? 'bg-success' :
+                                            'bg-secondary' %>">
+                                        <%= camp[i].status %>
+                                    </span>
+                                    <% } %>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: #8a0303;">
+                                    <%= camp[i].title %>
+                                </h5>
+                                <div class="mb-3">
+                                    <p class="mb-1"><i class="bi bi-calendar me-2"></i><strong>Date:</strong>
+                                        <%= camp[i].date.toLocaleDateString('en-US', { day: '2-digit' , month: 'long' ,
+                                            year: 'numeric' }) %>
+                                    </p>
+                                    <!-- <p class="mb-1"><i class="bi bi-clock me-2"></i><strong>Time:</strong> -->
+                                    <% function to12Hour(time) { if (!time) return "" ; let [hours,
+                                        minutes]=time.split(":"); hours=parseInt(hours); let ampm=hours>= 12 ? "PM"
+                                        : "AM";
+                                        hours = hours % 12 || 12;
+
+                                        return hours + ":" + minutes + " " + ampm;
+                                        }
+                                        %>
+
+                                        <p class="mb-1">
+                                            <i class="bi bi-clock me-2"></i>
+                                            <strong>Time:</strong>
+                                            <%= to12Hour(camp[i].start_time) %>
+                                                -
+                                                <%= to12Hour(camp[i].end_time) %>
+                                        </p>
+
+                                        <p class="mb-0"><i class="bi bi-geo-alt me-2"></i><strong>Location:</strong>
+                                            <%= camp[i].location %>
+                                        </p>
+                                </div>
+                                <p class="card-text">
+                                    <%= camp[i].description %>
+                                </p>
+                                <div class="mb-3">
+                                    <!-- <span class="badge bg-light text-dark me-1"><i class="bi bi-people"></i> 50+
+                                        Donors</span> -->
+                                    <span class="badge bg-light text-dark"><i class="bi bi-award"></i> Free Health
+                                        Check</span>
+                                </div>
+                                <button class="btn w-100" style="background-color: #8a0303; color: white;">
+                                    <a href="/#register" class="text-white" style="text-decoration: none;"> Register
+                                        Now</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="row mt-5" id="stats-section">
+                <div class="col-12">
+                    <div class="card border-0" style="background-color: #8a0303; color: white;">
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-md-3 mb-3">
+                                    <h3 class="fw-bold counter" data-target="25">0</h3>
+                                    <p class="mb-0">Camps This Month</p>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <h3 class="fw-bold counter" data-target="1500">0</h3>
+                                    <p class="mb-0">Expected Donors</p>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <h3 class="fw-bold counter" data-target="15">0</h3>
+                                    <p class="mb-0">Partner Hospitals</p>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <h3 class="fw-bold counter" data-target="100">0</h3>
+                                    <p class="mb-0">Safe & Hygienic</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Call to Action -->
+            <div class="text-center mt-5">
+                <h4 class="mb-4" style="color: #8a0303;">Can't Find a Camp Near You?</h4>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <button class="btn btn-danger px-4">
+                        <i class="bi bi-calendar-plus me-2"></i><a href="/blood_request"
+                            style="text-decoration: none; font-weight: bold; color: white;">Request a Camp</a>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        const counters = document.querySelectorAll('.counter');
+        let counterStarted = false;
+
+        const startCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const increment = target / 100;
+
+                const updateCounter = () => {
+                    count += increment;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCounter();
+            });
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting && !counterStarted) {
+                startCounters();
+                counterStarted = true;
+            }
+        }, { threshold: 0.4 });
+
+        observer.observe(document.querySelector('#stats-section'));
+    </script>
+
+
+    <%- include ('footer.ejs') %>

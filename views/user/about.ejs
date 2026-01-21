@@ -1,0 +1,147 @@
+<%- include ('navbar.ejs') %>
+
+
+
+    <section class="about-us py-5 bg-light">
+        <div class="container py-5">
+            <h2 class="text-center mb-5">About Us</h2>
+
+            <div class="row g-4">
+                <!-- Mission Card with Image -->
+                <% for(var i=0; i < about.length; i++) { %>
+
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm border-1 overflow-hidden">
+                            <img src="/upload/about_us/<%= about[i].image %>" class="card-img-top" alt="Our Mission"
+                                style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h4 class="card-title blood-red">
+                                    <i class="bi bi-bullseye me-2"></i>
+                                    <%= about[i].title %>
+                                </h4>
+                                <p class="card-text">
+                                    <%= about[i].description %>
+                                </p>
+                                <div class="mt-3">
+                                    <h6 class="blood-red">
+                                        <%= about[i].focus_point_title %>:
+                                    </h6>
+                                    <ul class="list-unstyled">
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>
+                                            <%= about[i].focus_point_1 %>
+                                        </li>
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>
+                                            <%= about[i].focus_point_2 %>
+                                        </li>
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>
+                                            <%= about[i].focus_point_3 %>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+
+
+            </div>
+
+
+            <div class="row g-4 mt-1">
+                <!-- Impact Card -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <h4 class="card-title text-danger">Our Impact</h4>
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <h3 class="text-danger">50,000+</h3>
+                                    <p class="mb-0">Donations Facilitated</p>
+                                </div>
+                                <div class="col-6">
+                                    <h3 class="text-danger">25,000+</h3>
+                                    <p class="mb-0">Lives Saved</p>
+                                </div>
+                                <div class="col-6 mt-3">
+                                    <h3 class="text-danger">15,000+</h3>
+                                    <p class="mb-0">Registered Donors</p>
+                                </div>
+                                <div class="col-6 mt-3">
+                                    <h3 class="text-danger">200+</h3>
+                                    <p class="mb-0">Blood Drives Organized</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How We Work Card -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <h4 class="card-title text-danger">How We Work</h4>
+                            <p class="card-text">
+                                Our platform uses intelligent matching to connect donors with recipients based on blood
+                                type,
+                                location, and urgency. We maintain a real-time database of available donors, organize
+                                regular
+                                blood drives, and provide educational resources.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Partner Hospitals Card -->
+            <div class="col-md-12 my-4">
+                <div class="card shadow-sm border-1">
+                    <div class="card-body">
+                        <h4 class="blood-red mb-4">Our Network & Partners</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="blood-red">Partner Hospitals</h5>
+                                <ul>
+                                    <li>City General Hospital</li>
+                                    <li>Memorial Medical Center</li>
+                                    <li>Children's Speciality Hospital</li>
+                                    <li>Regional Trauma Center</li>
+                                    <li>University Medical Center</li>
+                                    <li>Saint Mary's Hospital</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="blood-red">Collaboration Partners</h5>
+                                <ul>
+                                    <li>National Blood Transfusion Service</li>
+                                    <li>Red Cross Society</li>
+                                    <li>Local Community Organizations</li>
+                                    <li>Corporate Social Responsibility Programs</li>
+                                    <li>Educational Institutions</li>
+                                    <li>Government Health Departments</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <%- include ('footer.ejs') %>
+
+
+
+
+        <style>
+            .blood-red {
+                color: #8a0303;
+            }
+
+            .bg-blood-red {
+                background-color: #8a0303;
+            }
+
+            .border-1 {
+                border: 1px solid #dee2e6;
+            }
+        </style>

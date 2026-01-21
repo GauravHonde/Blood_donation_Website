@@ -1,0 +1,86 @@
+<%- include('navbar.ejs') %>
+
+    <div class="container mt-4">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Camp Registrations</h5>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover align-middle text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Sr No</th>
+                                <th>Full Name</th>
+                                <th>Age</th>
+                                <th>Blood Group</th>
+                                <th>Phone Number</th>
+                                <th>City</th>
+                                <th>Camp Name</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% if (camp.length> 0) { %>
+                                <% for (var i=0; i < camp.length; i++) { %>
+                                    <tr>
+                                        <td>
+                                            <%= i + 1 %>
+                                        </td>
+                                        <td>
+                                            <%= camp[i].full_name %>
+                                        </td>
+                                        <td>
+                                            <%= camp[i].age %>
+                                        </td>
+
+                                        <td>
+                                            <span class="badge bg-danger">
+                                                <%= camp[i].blood_group %>
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <%= camp[i].phone_number %>
+                                        </td>
+                                        <td>
+                                            <%= camp[i].city %>
+                                        </td>
+                                        <td>
+                                            <%= camp[i].camp_name %>
+                                        </td>
+
+                                        <td>
+                                            <%= new Date(camp[i].created_at).toLocaleDateString('en-CA') %>
+                                        </td>
+
+                                        <td>
+                                            <a href="/admin/delete_camp/<%= camp[i].camp_register_id %>"
+                                                class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Delete this record?')">
+                                                Delete
+                                            </a>
+                                            <a href="/admin/edit_camp/<%= camp[i].camp_register_id %>"
+                                                class="btn btn-warning btn-sm me-1">
+                                                Edit
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                        <% } else { %>
+                                            <tr>
+                                                <td colspan="9">No Camp Found</td>
+                                            </tr>
+                                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('footer.ejs') %>

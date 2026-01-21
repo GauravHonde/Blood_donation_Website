@@ -1,0 +1,84 @@
+<%- include('navbar.ejs') %>
+    <!-- <a class="btn btn-primary" onclick="window.print()">Print</a> -->
+
+    <div class="container mt-4">
+        <table class="table table-bordered table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Sr No</th>
+                    <th>Patient Name</th>
+                    <th>Blood</th>
+                    <th>Units</th>
+                    <th>Hospital</th>
+                    <th>City</th>
+                    <!-- <th>Contact</th> -->
+                    <th>Phone</th>
+                    <th>Urgency</th>
+                    <th>Info</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% if (request.length> 0) { %>
+                    <% for (var i=0; i < request.length; i++) { %>
+                        <tr>
+                            <td>
+                                <%= i + 1 %>
+                            </td>
+                            <td>
+                                <%= request[i].patient_name %>
+                            </td>
+                            <td>
+                                <%= request[i].required_blood %>
+                            </td>
+                            <td>
+                                <%= request[i].quantity_required %>
+                            </td>
+                            <td>
+                                <%= request[i].hospital_name %>
+                            </td>
+                            <td>
+                                <%= request[i].city_location %>
+                            </td>
+                            <!-- <td>
+                                <%= request[i].contact_number %>
+                            </td> -->
+                            <td>
+                                <%= request[i].phone_number %>
+                            </td>
+                            <td>
+                                <%= request[i].urgency_level %>
+                            </td>
+                            <td>
+                                <%= request[i].additional_information || '-' %>
+                            </td>
+
+                            <td class="text-center">
+                                <a href="/admin/edit_donar_request/<%= request[i].patient_id %>"
+                                    class="btn btn-warning btn-sm me-2 text-white">
+                                    <i class="bi bi-pencil"></i> Edit
+                                </a>
+
+                                <a href="/admin/request_delete/<%= request[i].patient_id %>"
+                                    class="btn btn-danger btn-sm" onclick="return confirm('Delete this record?');">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </td>
+
+
+                        </tr>
+                        <% } %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="11">No Records Found</td>
+                                </tr>
+                                <% } %>
+            </tbody>
+            <!-- <a class="btn btn-primary" onclick="window.print()">Print</a> -->
+        </table>
+        <a class="btn btn-primary justify-content-center" onclick="window.print()">Print</a>
+
+    </div>
+
+    <%- include('footer.ejs') %>

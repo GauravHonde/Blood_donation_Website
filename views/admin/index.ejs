@@ -1,0 +1,163 @@
+<%- include('navbar.ejs') %>
+
+    <!-- Include Chart.js and FullCalendar CSS/JS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <div class="container-fluid mt-4">
+
+        <h1 class="h3 mb-4 text-dark">Admin Dashboard</h1>
+
+        <!-- Stat Cards -->
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="card text-white shadow-sm h-100"
+                    style="background: linear-gradient(135deg, #6a11cb, #2575fc);">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="bi bi-people-fill fs-1 me-3"></i>
+                        <div>
+                            <h3 class="mb-0">
+                                <%= donorsCount %>
+                            </h3>
+                            <p class="mb-0">Registered Donors</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card text-white shadow-sm h-100"
+                    style="background: linear-gradient(135deg, #ff416c, #ff4b2b);">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="bi bi-droplet-fill fs-1 me-3"></i>
+                        <div>
+                            <h3 class="mb-0">
+                                <%= requestsCount %>
+                            </h3>
+                            <p class="mb-0">Blood Requests</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card text-white shadow-sm h-100"
+                    style="background: linear-gradient(135deg, #11998e, #38ef7d);">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="bi bi-calendar2-event-fill fs-1 me-3"></i>
+                        <div>
+                            <h3 class="mb-0">
+                                <%= campsCount %>
+                            </h3>
+                            <p class="mb-0">Blood Camps</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card text-white shadow-sm h-100"
+                    style="background: linear-gradient(135deg, #f7971e, #ffd200);">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="bi bi-envelope-fill fs-1 me-3"></i>
+                        <div>
+                            <h3 class="mb-0">
+                                <%= messagesCount %>
+                            </h3>
+                            <p class="mb-0">Messages</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts & Calendar Row -->
+        <div class="row mt-4 g-4">
+            <!-- Donations vs Requests Chart -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Donations vs Requests</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="donationsChart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar for Upcoming Camps -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Upcoming Blood Camps</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="campCalendar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <%- include('footer.ejs') %>
+
+        <script>
+            // Donations vs Requests Chart
+            const ctx = document.getElementById('donationsChart').getContext('2d');
+            const donationsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Donors', 'Requests', 'Camps'],
+                    datasets: [{
+                        label: 'Count',
+                        data: [<%= donorsCount %>, <%= requestsCount %>, <%= campsCount %>],
+                        backgroundColor: [
+                            'rgba(106, 17, 203, 0.7)',
+                            'rgba(255, 65, 108, 0.7)',
+                            'rgba(17, 153, 142, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(106, 17, 203, 1)',
+                            'rgba(255, 65, 108, 1)',
+                            'rgba(17, 153, 142, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // FullCalendar Setup
+            document.addEventListener('DOMContentLoaded', function () {
+                var calendarEl = document.getElementById('campCalendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                    },
+                    events: [
+                <% camp.forEach(c => { %>
+                    {
+                        title: "<%= c.camp_name %>",
+                        start: "<%= c.date.toISOString().split('T')[0] %>",
+                        end: "<%= c.date.toISOString().split('T')[0] %>"
+                    },
+                <% }) %>
+            ]
+                });
+                calendar.render();
+            });
+        </script>

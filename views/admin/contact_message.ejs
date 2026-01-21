@@ -1,0 +1,82 @@
+<%- include('navbar.ejs') %>
+
+    <div class="container mt-4">
+        <div class="card shadow">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Contact Messages</h5>
+            </div>
+
+            <div class="card-body">
+
+                <!-- PRINT AREA START -->
+                <div id="printArea">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover align-middle text-center">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Sr No</th>
+                                    <th>Contact Name</th>
+                                    <th>Contact Email</th>
+                                    <th>Subject</th>
+                                    <th>Message</th>
+                                    <th>Date</th>
+                                    <th class="no-print">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% if (message.length> 0) { %>
+                                    <% for (var i=0; i < message.length; i++) { %>
+                                        <tr>
+                                            <td>
+                                                <%= i + 1 %>
+                                            </td>
+                                            <td>
+                                                <%= message[i].contact_name %>
+                                            </td>
+                                            <td>
+                                                <%= message[i].contact_email %>
+                                            </td>
+                                            <td>
+                                                <%= message[i].contact_subject %>
+                                            </td>
+                                            <td class="text-start">
+                                                <%= message[i].message %>
+                                            </td>
+                                            <td>
+                                                <%= new Date(message[i].created_at).toLocaleDateString('en-CA') %>
+                                            </td>
+                                            <td class="no-print">
+                                                <a href="/admin/delete_message/<%= message[i].contact_id %>"
+                                                    class="btn btn-danger btn-sm">
+                                                    Delete
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                            <% } else { %>
+                                                <tr>
+                                                    <td colspan="7">No Messages Found</td>
+                                                </tr>
+                                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- PRINT AREA END -->
+
+                <div class="text-center mt-3 no-print">
+                    <button class="btn btn-primary" onclick="printTable()">Print</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        function printTable() {
+            window.print();
+        }
+    </script>
+
+
+    <%- include('footer.ejs') %>

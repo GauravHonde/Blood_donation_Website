@@ -1,0 +1,287 @@
+<%- include('navbar.ejs') %>
+
+    <!-- Hero Section -->
+    <section class="py-5 my-3 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h1 class="blood-red fw-bold my-5">Blood Types Information</h1>
+                <p class="lead">Complete guide to blood types, compatibility, and donation</p>
+            </div>
+
+            <!-- Simple Blood Types Table -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-blood-red text-white">
+                            <h4 class="mb-0">
+                                <i class="bi bi-droplet me-2"></i>Blood Types Compatibility Table
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead class="table-danger">
+                                        <tr>
+                                            <th>Blood Type</th>
+                                            <th>Can Donate To</th>
+                                            <th>Can Receive From</th>
+                                            <th>Population %</th>
+                                            <th>Category</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- O+ -->
+                                        <tr>
+                                            <td><strong class="text-danger">O+</strong></td>
+                                            <td>O+, A+, B+, AB+</td>
+                                            <td>O+, O-</td>
+                                            <td>36%</td>
+                                            <td><span class="badge bg-success">Most Common</span></td>
+                                        </tr>
+                                        <!-- A+ -->
+                                        <tr>
+                                            <td><strong class="text-danger">A+</strong></td>
+                                            <td>A+, AB+</td>
+                                            <td>A+, A-, O+, O-</td>
+                                            <td>28%</td>
+                                            <td><span class="badge bg-info">Common</span></td>
+                                        </tr>
+                                        <!-- B+ -->
+                                        <tr>
+                                            <td><strong class="text-danger">B+</strong></td>
+                                            <td>B+, AB+</td>
+                                            <td>B+, B-, O+, O-</td>
+                                            <td>20%</td>
+                                            <td><span class="badge bg-secondary">Moderate</span></td>
+                                        </tr>
+                                        <!-- AB+ -->
+                                        <tr>
+                                            <td><strong class="text-danger">AB+</strong></td>
+                                            <td>AB+</td>
+                                            <td>All Types</td>
+                                            <td>4%</td>
+                                            <td><span class="badge bg-warning">Rare</span></td>
+                                        </tr>
+                                        <!-- O- -->
+                                        <tr>
+                                            <td><strong>O-</strong></td>
+                                            <td>All Types</td>
+                                            <td>O-</td>
+                                            <td>7%</td>
+                                            <td><span class="badge bg-danger">Most Needed</span></td>
+                                        </tr>
+                                        <!-- A- -->
+                                        <tr>
+                                            <td><strong>A-</strong></td>
+                                            <td>A+, A-, AB+, AB-</td>
+                                            <td>A-, O-</td>
+                                            <td>6%</td>
+                                            <td><span class="badge bg-info">Valuable</span></td>
+                                        </tr>
+                                        <!-- B- -->
+                                        <tr>
+                                            <td><strong>B-</strong></td>
+                                            <td>B+, B-, AB+, AB-</td>
+                                            <td>B-, O-</td>
+                                            <td>2%</td>
+                                            <td><span class="badge bg-warning">Very Rare</span></td>
+                                        </tr>
+                                        <!-- AB- -->
+                                        <tr>
+                                            <td><strong>AB-</strong></td>
+                                            <td>AB+, AB-</td>
+                                            <td>AB-, A-, B-, O-</td>
+                                            <td>1%</td>
+                                            <td><span class="badge bg-dark">Rarest</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Facts -->
+            <div class="row mb-5">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title blood-red">
+                                <i class="bi bi-info-circle me-2"></i>Key Facts
+                            </h5>
+                            <ul class="mb-0">
+                                <li><strong>O-</strong> is the universal donor</li>
+                                <li><strong>AB+</strong> is the universal recipient</li>
+                                <li>Blood shelf life: 42 days</li>
+                                <li>Most needed: O- (only 7% have it)</li>
+                                <li>Most common: O+ (36% of population)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title blood-red">
+                                <i class="bi bi-lightbulb me-2"></i>Compatibility Tips
+                            </h5>
+                            <ul class="mb-0">
+                                <li>Positive types can receive from both + and -</li>
+                                <li>Negative types can only receive from -</li>
+                                <li>O- donors help everyone</li>
+                                <li>AB+ patients can receive from anyone</li>
+                                <li>Know your type for emergencies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Population Distribution -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0 blood-red">
+                                <i class="bi bi-pie-chart me-2"></i>Population Distribution
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 border rounded">
+                                        <h6 class="text-danger">O+</h6>
+                                        <h4>36%</h4>
+                                        <small>Most Common</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 border rounded">
+                                        <h6 class="text-danger">A+</h6>
+                                        <h4>28%</h4>
+                                        <small>Second Most</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 border rounded">
+                                        <h6 class="text-danger">B+</h6>
+                                        <h4>20%</h4>
+                                        <small>Third Most</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 border rounded">
+                                        <h6 class="text-dark">O-</h6>
+                                        <h4>7%</h4>
+                                        <small>Most Needed</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 border rounded">
+                                        <h6 class="text-dark">A-</h6>
+                                        <h4>6%</h4>
+                                        <small>Valuable</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 border rounded">
+                                        <h6 class="text-danger">AB+</h6>
+                                        <h4>4%</h4>
+                                        <small>Rare</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 border rounded">
+                                        <h6 class="text-dark">B-</h6>
+                                        <h4>2%</h4>
+                                        <small>Very Rare</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 border rounded">
+                                        <h6 class="text-dark">AB-</h6>
+                                        <h4>1%</h4>
+                                        <small>Rarest</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card bg-blood-red text-white">
+                        <div class="card-body text-center py-4">
+                            <h4 class="mb-3">Ready to Make a Difference?</h4>
+                            <p class="mb-4">Your blood type could save someone's life today</p>
+                            <div class="d-flex justify-content-center gap-3 flex-wrap">
+
+                                <a href="/donor_register" class="btn btn-light blood-red" data-bs-toggle="modal"
+                                    data-bs-target="#registerModal">
+                                    <i class="bi bi-person-plus me-2"></i>Register as Donor
+                                </a>
+
+                                <a href="/blood_request" class="btn btn-outline-light">
+                                    <i class="bi bi-bell me-2"></i>Request Blood
+                                </a>
+                                <a href="/" class="btn btn-outline-light">
+                                    <i class="bi bi-house me-2"></i>Back to Home
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('footer.ejs') %>
+
+        <style>
+            .blood-red {
+                color: #8a0303;
+            }
+
+            .bg-blood-red {
+                background-color: #8a0303;
+            }
+
+            .table-danger {
+                background-color: #8a0303;
+                color: white;
+            }
+
+            .table-hover tbody tr:hover {
+                background-color: rgba(138, 3, 3, 0.05);
+            }
+
+            .badge {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.5rem;
+            }
+
+            .card {
+                border: 1px solid #dee2e6;
+            }
+        </style>
+
+        <script>
+            // Simple row hover effect
+            document.addEventListener('DOMContentLoaded', function () {
+                const tableRows = document.querySelectorAll('tbody tr');
+
+                tableRows.forEach(row => {
+                    row.addEventListener('mouseenter', function () {
+                        this.style.backgroundColor = '#f8f9fa';
+                    });
+
+                    row.addEventListener('mouseleave', function () {
+                        this.style.backgroundColor = '';
+                    });
+                });
+            });
+        </script>

@@ -1,0 +1,109 @@
+<%- include('navbar.ejs') %>
+
+    <div class="container mt-5">
+        <div class="card shadow border-0">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">
+                    <i class="bi bi-pencil-square me-2"></i>
+                    Edit Donation Camp
+                </h5>
+            </div>
+
+            <div class="card-body">
+                <form action="/admin/update_donation_camp/<%= info[0].id %>" method="POST"
+                    enctype="multipart/form-data">
+
+                    <!-- Camp Title -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Camp Title</label>
+                        <input type="text" name="title" class="form-control" value="<%= info[0].title %>" required>
+                    </div>
+
+                    <!-- Date -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Camp Date</label>
+                        <input type="date" name="date" class="form-control"
+                            value="<%= info[0].date ? new Date(info[0].date).toISOString().split('T')[0] : '' %>"
+                            required>
+                    </div>
+
+                    <!-- Time -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-semibold">Start Time</label>
+                            <input type="time" name="start_time" class="form-control" value="<%= info[0].start_time %>"
+                                required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-semibold">End Time</label>
+                            <input type="time" name="end_time" class="form-control" value="<%= info[0].end_time %>"
+                                required>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Location</label>
+                        <input type="text" name="location" class="form-control" value="<%= info[0].location %>"
+                            required>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Description</label>
+                        <textarea name="description" class="form-control" rows="4"
+                            required><%= info[0].description %></textarea>
+                    </div>
+
+                    <!-- Old Image -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Current Image</label><br>
+                        <% if (info[0].image) { %>
+                            <img src="/upload/donation_camp/<%= info[0].image %>" class="rounded shadow"
+                                style="width:150px;height:100px;object-fit:cover;">
+                            <% } else { %>
+                                <p class="text-muted">No image available</p>
+                                <% } %>
+                    </div>
+
+                    <!-- New Image -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Change Image</label>
+                        <input type="file" name="image" class="form-control">
+                        <input type="hidden" name="old_image" value="<%= info[0].image %>">
+                    </div>
+
+                    <!-- Status -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Status</label>
+                        <select class="form-select" name="status" required>
+                            <option value="Today" <%=info[0].status==='Today' ? 'selected' : '' %>>Today
+                            </option>
+                            <option value="New" <%=info[0].status==='New' ? 'selected' : '' %>>New
+                            </option>
+                            <option value="Urgent" <%=info[0].status==='Urgent' ? 'selected' : '' %>>Urgent
+                            </option>
+                            <option value="Upcoming" <%=info[0].status==='Upcoming' ? 'selected' : '' %>>Upcoming
+                            </option>
+                            <option value="Weekend" <%=info[0].status==='Weekend' ? 'selected' : '' %>>Weekend
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-warning px-5">
+                            <i class="bi bi-save me-2"></i>Update Camp
+                        </button>
+                        <a href="/admin/donation_camp" class="btn btn-secondary ms-2">
+                            Cancel
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include('footer.ejs') %>
